@@ -107,7 +107,7 @@ Keypresses will be forwarded to the game without it needing focus. Press `Ctrl+C
 
 ## Bazzite / Immutable Distro Installation
 
-On Bazzite or SteamOS (which have immutable root filesystems), `pacman` can't install packages directly to the host. The recommended approach is a **Distrobox container**:
+On Bazzite or SteamOS (which have immutable root filesystems), `pacman` and other package managers can't install packages directly to the host. The recommended approach is a **Distrobox container**:
 
 ```bash
 # Create an Arch-based container (Bazzite has a shortcut for this)
