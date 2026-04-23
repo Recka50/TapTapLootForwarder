@@ -13,7 +13,6 @@ TapTapLoot is launched in a rootful Xwayland instance (via a Steam launch script
 - Linux (Wayland or X11)
 - Python 3.7+
 - `xdotool`
-- `xdotool` must be installed
 - Access to `/dev/input/` devices (via `input` group)
 - TapTapLoot running via the Xwayland launch script (see below)
 
@@ -22,20 +21,26 @@ TapTapLoot is launched in a rootful Xwayland instance (via a Steam launch script
 ### 1. Install system dependencies
 
 ```bash
-# Arch Linux / Bazzite / SteamOS
+# Arch Linux
 sudo pacman -S xdotool python-pipx
-# or on immutable distros (Bazzite, SteamOS):
-ujust setup-decky  # if needed, then use distrobox or toolbox for pipx
+
+# Fedora / Nobara
+sudo dnf install xdotool pipx
+
+# Debian / Ubuntu
+sudo apt install xdotool pipx
 ```
+
+> **Bazzite / immutable distros:** See the [Bazzite section](#bazzite--immutable-distro-installation) below.
 
 ### 2. Install this tool
 
 ```bash
 # From this repo
-pipx install git+https://gitea.example.com/yourname/TapTapLootForwarder.git
+pipx install git+https://gitea.recka.tech/bepis/TapTapLootForwarder.git
 
 # Or from a local clone
-git clone https://gitea.example.com/yourname/TapTapLootForwarder.git
+git clone https://gitea.recka.tech/bepis/TapTapLootForwarder.git
 cd TapTapLootForwarder
 pipx install .
 ```
@@ -49,7 +54,7 @@ sudo usermod -aG input $USER
 
 ## Steam Launch Script
 
-Save the following as `~/.local/bin/taptaploot-forward.sh` and make it executable (`chmod +x`):
+Save the following as `~/.local/bin/taptaploot-forward.sh` (or download from the repo above) and make it executable (`chmod +x`):
 
 ```bash
 #!/bin/bash
@@ -102,23 +107,27 @@ Keypresses will be forwarded to the game without it needing focus. Press `Ctrl+C
 
 ## Bazzite / Immutable Distro Installation
 
-On Bazzite, Nobara, or SteamOS (which use immutable root filesystems), the recommended approach is to use a **Distrobox container**:
+On Bazzite or SteamOS (which have immutable root filesystems), `pacman` can't install packages directly to the host. The recommended approach is a **Distrobox container**:
 
 ```bash
-# Create an Arch-based container
+# Create an Arch-based container (Bazzite has a shortcut for this)
+ujust distrobox-arch
+# or manually:
 distrobox create --name taptaploot --image archlinux:latest
 distrobox enter taptaploot
 
 # Inside the container:
 sudo pacman -S xdotool python-pipx
 sudo usermod -aG input $USER
-pipx install git+https://gitea.example.com/yourname/TapTapLootForwarder.git
+pipx install git+https://gitea.recka.tech/bepis/TapTapLootForwarder.git
 
-# Export the command to your host
+# Export the command to your host so you can run it outside the container
 distrobox-export --bin ~/.local/bin/taptaploot-forwarder
 ```
 
 Then run `taptaploot-forwarder` from your host terminal as normal.
+
+> **Note:** The `input` group change inside the container may still require a full logout/login on the host to take effect. If you get permission errors, try running `sudo taptaploot-forwarder` temporarily inside the container.
 
 ## Troubleshooting
 
