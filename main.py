@@ -21,7 +21,22 @@ keyboard_threads = []
 keyboard_devices = []
 
 TARGET_WINDOW_NAME = 'TapTapLoot'
-TARGET_DISPLAY = ':10'
+
+def detect_display():
+    """Use Xwayland display if launch script is running, otherwise fall back to current $DISPLAY"""
+    xauth_files = glob.glob('/tmp/taptaploot-xauth.*')
+    if xauth_files:
+        # Extract display number from the xauth file
+        import subprocess
+        result = subprocess.getoutput(f"xauth -f {xauth_files[0]} list")
+        for line in result.splitlines():
+            if line.startswith(':'):
+                return line.split('/')[0].strip()
+        return ':10'  # fallback if parsing fails
+    # No xauth file = native X11, use current display
+    return os.environ.get('DISPLAY', ':0')
+
+TARGET_DISPLAY = detect_display()
 
 def get_xauth_path():
     """Dynamically find the current taptaploot xauth file"""

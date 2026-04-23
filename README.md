@@ -52,7 +52,7 @@ sudo usermod -aG input $USER
 # Log out and back in for this to take effect
 ```
 
-## Steam Launch Script
+## Steam Launch Script (Skip if using X11)
 
 Save the following as `~/.local/bin/taptaploot-forward.sh` (or download from the repo above) and make it executable (`chmod +x`):
 
