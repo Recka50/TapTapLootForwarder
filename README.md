@@ -12,7 +12,10 @@ TapTapLoot is launched in a rootful Xwayland instance (via a Steam launch script
 
 - Linux (Wayland or X11)
 - Python 3.7+
-- `xdotool`
+- Python pipx
+- xdotool
+- gcc
+- git
 - Access to `/dev/input/` devices (via `input` group)
 - TapTapLoot running via the Xwayland launch script (see below)
 
@@ -107,17 +110,17 @@ Keypresses will be forwarded to the game without it needing focus. Press `Ctrl+C
 
 ## Bazzite / Immutable Distro Installation
 
-On Bazzite or SteamOS (which have immutable root filesystems), `pacman` and other package managers can't install packages directly to the host. The recommended approach is a **Distrobox container**:
+On Bazzite or other Immutable/Atomic distros (which have immutable root filesystems), `pacman` and other package managers can't install packages directly to the host. The recommended approach is a **Distrobox container**:
 
 ```bash
-# Create an Arch-based container (Bazzite has a shortcut for this)
+# Create an Arch-based container, Bazzite has a shortcut for this:
 ujust distrobox-arch
-# or manually:
+# or manually if on non-Bazzite immutable distros:
 distrobox create --name taptaploot --image archlinux:latest
 distrobox enter taptaploot
 
 # Inside the container:
-sudo pacman -S xdotool python-pipx
+sudo pacman -S gcc python-evdev xdotool python-pipx git
 sudo usermod -aG input $USER
 pipx install git+https://gitea.recka.tech/bepis/TapTapLootForwarder.git
 
@@ -141,3 +144,4 @@ Then run `taptaploot-forwarder` from your host terminal as normal.
 
 - [BongoCatXP](https://github.com/ITJesse/BongoCatXP) by [ITJesse](https://github.com/ITJesse) — original implementation this is based on
 - MIT License
+-Updated Immutable distro instructions
