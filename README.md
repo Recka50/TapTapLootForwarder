@@ -59,7 +59,7 @@ Save the following as `~/.local/bin/taptaploot-forward.sh` (or download from the
 ```bash
 #!/bin/bash
 # Launches TapTapLoot in rootful Xwayland
-# Steam launch option: ~/.local/bin/taptaploot-forward.sh %command%
+# Steam launch option: ~/.local/bin/taptaploot-forward.sh %command% -screen-fullscreen 0
 
 for i in $(seq 10 30); do
     if [ ! -e "/tmp/.X11-unix/X$i" ]; then
@@ -79,7 +79,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-XAUTHORITY="$GAME_XAUTH" Xwayland "$GAME_DISPLAY" -geometry 1920x1080 -noreset -auth "$GAME_XAUTH" &
+XAUTHORITY="$GAME_XAUTH" Xwayland "$GAME_DISPLAY" -geometry 800x600 -noreset -auth "$GAME_XAUTH" &
 XWAYLAND_PID=$!
 sleep 1
 

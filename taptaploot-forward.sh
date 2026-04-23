@@ -20,7 +20,8 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-XAUTHORITY="$GAME_XAUTH" Xwayland "$GAME_DISPLAY" -geometry 400x300 -noreset -auth "$GAME_XAUTH" &
+# Change the resolution here if you would like it larger or smaller
+XAUTHORITY="$GAME_XAUTH" Xwayland "$GAME_DISPLAY" -geometry 800x600 -noreset -auth "$GAME_XAUTH" &
 XWAYLAND_PID=$!
 sleep 1
 
