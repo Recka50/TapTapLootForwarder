@@ -144,4 +144,3 @@ Then run `taptaploot-forwarder` from your host terminal as normal.
 
 - [BongoCatXP](https://github.com/ITJesse/BongoCatXP) by [ITJesse](https://github.com/ITJesse) — original implementation this is based on
 - MIT License
--Updated Immutable distro instructions
