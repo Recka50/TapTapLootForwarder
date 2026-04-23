@@ -25,13 +25,13 @@ TapTapLoot is launched in a rootful Xwayland instance (via a Steam launch script
 
 ```bash
 # Arch Linux
-sudo pacman -S xdotool python-pipx
+sudo pacman -S gcc python-evdev xdotool python-pipx git
 
 # Fedora / Nobara
-sudo dnf install xdotool pipx
+sudo dnf install gcc python3-devel xdotool pipx git
 
-# Debian / Ubuntu
-sudo apt install xdotool pipx
+# Debian / Ubuntu / Mint
+sudo apt install gcc python3-dev xdotool pipx git
 ```
 
 > **Bazzite / immutable distros:** See the [Bazzite section](#bazzite--immutable-distro-installation) below.
